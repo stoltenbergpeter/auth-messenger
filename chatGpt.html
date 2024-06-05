@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+	<meta name="generator" content="Jekyll v4.1.1">
+	<title>Messenger with Authentication</title>
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+	<style>
+		body {
+			background: url("images/messenger-bg.png"), url("images/auth-bg.png");
+			background-position: right top, left top;
+			background-repeat: no-repeat;
+			overflow-x: hidden;
+		}
+
+		main {
+			margin: 0 auto;
+		}
+
+		.formLabel {
+			transform: scale(0.75) translateY(29px);
+			background: #fff;
+			bottom: 17px;
+			box-sizing: border-box;
+			color: #5f6368;
+			font-size: 18px;
+			font-weight: 400;
+			left: 8px;
+			padding: 0 8px;
+			transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+			white-space: nowrap;
+			width: auto;
+			z-index: 1;
+		}
+
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-light bg-dark justify-content-between">
+		<a class="navbar-brand"></a>
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="pr-3" style="color: #fff" for="selectLanguage">Select Language</label>
+				<select class="form-control" id="selectLanguage" onchange="updateMessengerLocale()">
+					<option selected value="en-us">English</option>
+					<option value="cs">Czech</option>
+					<option value="da">Danish</option>
+					<option value="de">German</option>
+					<option value="es">Spanish</option>
+					<option value="fi">Finnish</option>
+					<option value="it">Italian</option>
+					<option value="ko">Korean</option>
+					<option value="nl">Dutch</option>
+					<option value="no">Norwegian</option>
+					<option value="pt-br">Portugese</option>
+					<option value="sv">Swedish</option>
+					<option value="th">Thai</option>
+					<option value="tr">Turkish</option>
+					<option value="zh-cn">Chinese China</option>
+					<option value="zh-tw">Chinese Taiwan</option>
+					<option value="fr">French</option>
+					<option value="ja">Japanese</option>
+					<option value="pl">Polish</option>
+					<option value="ru">Russian</option>
+					<option value="ar">Arabic</option>
+					<option value="he">Hebrew</option>
+				</select>
+			</div>
+		</form>
+	</nav>
+
+	<main>
+		<div class="container-fluid">
+			<div class="row text-center">
+				<div class="col-sm-12 mt-2">
+					<h2>Messenger with Authentication</h2>
+					<p>Enables the new sign in experience with OKTA Identity provider</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<div class="card mb-4 shadow-sm">
+						<div class="card-header text-center">
+							Deployment details
+						</div>
+						<div class="card-body pt-0">
+							<label class="formLabel" for="enter_deploymentId">Deployment ID</label>
+							<input type="text" id="enter_deploymentId" class="form-control" value="39902959-c3fc-47cf-9d25-b9fd8f17741f" readonly>
+							<label class="formLabel" for="enter_environment">Environment</label>
+							<input type="text" id="enter_environment" class="form-control" value="Prod UWS2" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row justify-content-md-center mb-1">
+				<div class="col-md-3" id="okta_sign_in">
+					<div class="card">
+						<div class="card-header" id="signButton">
+							<button class="btn btn-primary btn-block collapsed" id="signInButton" data-toggle="collapse"
+								data-target="#signin" aria-expanded="false" aria-controls="signin">
+								Sign In with OKTA
+							</button>
+						</div>
+
+						<div id="signin" class="collapse show" aria-labelledby="signButton" data-parent="#okta_sign_in">
+							<div class="card-body pt-0 pb-0">
+								<label for="authClientId" class="formLabel">Client Id</label>
+								<input type="text" id="authClientId" class="form-control" value="0oahio9taclbUk06H5d7" readonly>
+								<label for="oktaURL" class="formLabel">OKTA URL</label>
+								<input type="text" id="oktaURL" class="form-control" value="https://dev-73926723.okta.com/oauth2/default" readonly>
+								<label for="maxAge" class="formLabel">Max Age</label>
+								<input type="number" id="maxAge" class="form-control" value="5" readonly>
+								<label for="authScope" class="formLabel" style="margin-left: -22px;">Additional Auth Scope</label>
+								<input type="text" id="authScope" class="form-control" value="None" readonly>
+								<label for="oAuthFlow" class="formLabel" style="margin-left: -15px;">AuthFlow</label>
+								<input type="text" id="oAuthFlow" class="form-control" value="Authorization Code Flow" readonly>
+
+								<div class="row text-center justify-content-md-center gy-5 mt-3 mb-3">
+									<div class="col-sm-12">
+										<button class="btn btn-md btn-primary text-center" id="authLoginBtn">Sign in</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-md-3" id="okta_sign_out" style="display: none;">
+					<div class="card">
+						<div class="card-header">
+							<button class="btn btn-md btn-primary btn-block" id="authLogoutBtn">Sign Out</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3" id="loading" style="display: none;">
+					<div class="card">
+						<div class="card-header">
+							<button class="btn btn-md btn-primary btn-block">Signing In...</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Bootstrap and jQuery JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+		integrity="sha384-pzjw8f+ua7Kw1TIqYb6Y1d3yLtiwmVAj5mxNK2f9FbqqmP9HO65ilnB8Dh5v5M1t" crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+		integrity="sha384-w1QKFnrR2L9vC6kJuejjy2lbVc3tvQbcA64md+5uH2y56jKkFf5dS2jjJRVw5qR9" crossorigin="anonymous">
+	</script>
+
+	<script>
+		function updateMessengerLocale() {
+			const selectedLocale = document.getElementById("selectLanguage").value;
+			window._genesys.messenger.locale = selectedLocale;
+		}
+
+		document.getElementById('authLoginBtn').onclick = function () {
+			const clientId = document.getElementById("authClientId").value;
+			const oktaURL = document.getElementById("oktaURL").value;
+			const maxAge = document.getElementById("maxAge").value || 3600;
+			const scope = document.getElementById("authScope").value;
+			const flow = document.getElementById("oAuthFlow").value;
+
+			window._genesys = window._genesys || {};
+			window._genesys.auth = {
+				clientId: clientId,
+				oktaURL: oktaURL,
+				maxAge: maxAge,
+				scope: scope,
+				flow: flow
+			};
+
+			document.getElementById("okta_sign_in").style.display = "none";
+			document.getElementById("loading").style.display = "block";
+
+			// Placeholder for actual sign-in logic
+			setTimeout(function () {
+				document.getElementById("loading").style.display = "none";
+				document.getElementById("okta_sign_out").style.display = "block";
+			}, 3000);
+		};
+
+		document.getElementById('authLogoutBtn').onclick = function () {
+			document.getElementById("okta_sign_out").style.display = "none";
+			document.getElementById("okta_sign_in").style.display = "block";
+
+			// Placeholder for actual sign-out logic
+			alert("Logged out successfully!");
+		};
+	</script>
+</body>
+
+</html>
